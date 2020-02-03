@@ -17,6 +17,7 @@ nav ul {
 nav li {
     display: inline-block;
     width: 7rem;
+    padding-right: 32px;
 }
 
 .menu a {
