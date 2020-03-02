@@ -15,8 +15,9 @@
         <div :class="{ 'is-active':isOpen }" class="navbar-menu">
             <div class="navbar-start">
 
-            <router-link class="navbar-item" to="/">Home</router-link>
-            <router-link class="navbar-item" to="/about">About</router-link>
+            <router-link class="navbar-item" to="/" active-class="is-current" exact>Home</router-link>
+            <router-link class="navbar-item" to="/about" active-class="is-current">About</router-link>
+            <router-link class="navbar-item" to="/game" active-class="is-current">Game</router-link>
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
@@ -47,7 +48,7 @@
                 <a class="button is-primary">
                     <strong>Sign up</strong>
                 </a>
-                <a class="button is-light">
+                <a class="button is-light" href="/login">
                     Log in
                 </a>
                 </div>
@@ -67,5 +68,8 @@ export default {
 </script>
 
 <style>
-
+.is-current{
+    font-weight: bold;
+    color: purple;
+}
 </style>

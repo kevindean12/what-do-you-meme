@@ -18,26 +18,3 @@
   </section>
 </template>
 
-<script>
-// @ is an alias to /src
-import {Players, PictureDeck, CurrentPicture, Init} from "../models/Game";
-Init();
-
-export default { //inside this object are available to our component
-  name: 'Home',
-  data: () => ({
-    Players,
-    PictureDeck,
-    CurrentPicture
-  }),
-  components: {
-    
-  }
-}
-</script>
-
-<style>
-  img.card-image{
-    width: 100%;
-  }
-</style>
