@@ -23,7 +23,6 @@
 <script>
 // @ is an alias to /src
 import {Players, PictureDeck, CurrentPicture, Init} from "../models/Game";
-Init();
 
 export default { //inside this object are available to our component
   name: 'Home',
@@ -32,6 +31,9 @@ export default { //inside this object are available to our component
     PictureDeck,
     CurrentPicture
   }),
+  created(){
+    Init();
+  },
   components: {
     
   }
