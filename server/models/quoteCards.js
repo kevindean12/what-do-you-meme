@@ -13,5 +13,5 @@ function add(text){
 module.exports = {
     list: quoteCards,
     add: add
-}
+};
 
