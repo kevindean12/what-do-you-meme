@@ -10,29 +10,27 @@
       <div class="card">
       <div class="card-content">
         <ul>
-          <li v-for="player in Players" :key="player.Name">
+          <li v-for="player in Game.Players" :key="player.Name">
             {{player.Name}} {{player.Score}}
           </li>
         </ul>
       </div>
-      <img :src="CurrentPicture" class="card-image">
+      <img :src="Game.CurrentPicture" class="card-image">
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import {Players, PictureDeck, CurrentPicture, Init} from "../models/Game";
-
+//import {Players, PictureDeck, CurrentPicture, Init} from "../models/Game";
+import * as Game from "../models/Game"; //import all the named exports, creates an object that holds them all as props
 export default { //inside this object are available to our component
   name: 'Home',
   data: () => ({
-    Players,
-    PictureDeck,
-    CurrentPicture
+    Game
   }),
   created(){
-    Init();
+    Game.Init();
   },
   components: {
     
