@@ -1,6 +1,7 @@
 const express = require('express');
+const path = require('path'); //path is relative to node_modules, unless prefix with a dot, then it's relative to execution directory
+
 const gameController = require('./controllers/game');
-const path = require('path');
 
 const app = express();
 const port = 3000;
