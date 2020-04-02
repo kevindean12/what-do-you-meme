@@ -1,5 +1,5 @@
 const Users = [
-    {Name: 'Kevin', Password: '2020', Email: 'someone@gmail.com', userID: 0},
+    {Name: 'Kevin', Password: '2020', Email: 'kevin@notmail.com', userID: 0},
     {Name: 'Person', Password: '2012', Email: 'person@gmail.com', userID: 1}
 ];
 
@@ -10,5 +10,7 @@ module.exports = {
         if(user.Password != password) throw Error('Incorrect password');
     
         return user;
-    }
+    },
+
+    GetUser: (userID) => Users[userID],
 }

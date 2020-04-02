@@ -1,7 +1,9 @@
-const CurrentUser = require("./Users");
-
+const users = require("./Users");
+const captionsDeck = require("./quoteCards");
+const DEAL_AMOUNT = 3;
+let iCurrentCaption = 0;
 const Players = [
-    {Name: 'Bernie', Score: 0, isDealer: false}
+    {Name: 'Bernie', Score: 0, isDealer: true}
 ];
 
 const PictureDeck = [
@@ -11,29 +13,32 @@ const PictureDeck = [
     
 ];
 
-let CurrentPicture = ""; //could use int index here
+let CurrentPicture = ""; 
 
 const CardsInPlay = [];
 
 function SubmitCaption(caption, playerID) {
+    const player = Players[playerID];
+    if(player.isDealer) throw Error("Dealer is not allowed to submit a caption");
     CardsInPlay.push({
         Text: caption,
-        playerID,
+        PlayerID: playerID,
         isChosen: false,
     });
 }
 
-function Init(){
-    //TODO this doesn't make sense on the server anymore
-    Players.push({Name: Users.CurrentUser.Name, Score: 0, isDealer: true})
-    MyCards.push(CaptionsDeck[0]);
-    MyCards.push(CaptionsDeck[1]);
+function Join(userID){
+    const user = users.GetUser(userID)
+    Players.push({Name: user.Name, Score: 0, isDealer: false})
+    
+    const myCards = captionsDeck.list.slice(iCurrentCaption, iCurrentCaption + DEAL_AMOUNT);
+    iCurrentCaption += DEAL_AMOUNT; //move current caption ahead
 
-    CurrentPicture = PictureDeck[0];
+    return { playerID: Players.length-1, myCards};
 }
 
 module.exports = {
     Players, PictureDeck, CurrentPicture, 
-    CardsInPlay,
-    Init, SubmitCaption
+    CardsInPlay: CardsInPlay,
+    Join, SubmitCaption
 }

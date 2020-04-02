@@ -1,6 +1,7 @@
 const quoteCards = [
     'It\'s a trap!',
-    'Soooon'
+    'Soooon',
+    'When nothing goes right, go left'
 ];
 
 function add(text){
