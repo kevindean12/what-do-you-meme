@@ -13,7 +13,12 @@ const PictureDeck = [
     
 ];
 
-let CurrentPicture = ""; 
+let CurrentPicture = "";
+let iCurrentPicture = 0;
+
+function FlipPicture(){
+    return module.exports.CurrentPicture = PictureDeck[iCurrentPicture++];
+}
 
 const CardsInPlay = [];
 
@@ -40,5 +45,5 @@ function Join(userID){
 module.exports = {
     Players, PictureDeck, CurrentPicture, 
     CardsInPlay: CardsInPlay,
-    Join, SubmitCaption
+    Join, SubmitCaption, FlipPicture
 }
