@@ -42,9 +42,9 @@ export default {
         }
     },
     methods: {
-        login(){
+        async login(){
             try {
-                Users.Login(this.email, this.password);
+                await Users.Login(this.email, this.password);
                 this.$router.push('/game');
             } catch (error) {
                 this.error = error;
