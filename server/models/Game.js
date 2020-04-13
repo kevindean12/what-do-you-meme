@@ -3,7 +3,7 @@ const captionsDeck = require("./quoteCards");
 const DEAL_AMOUNT = 3;
 let iCurrentCaption = 0;
 const Players = [
-    {Name: 'Bernie', Score: 0, isDealer: true}
+    { Name: 'Bernie', Score: 0, isDealer: true, userID: 2 }
 ];
 
 const PictureDeck = [
@@ -34,7 +34,7 @@ function SubmitCaption(caption, playerID) {
 
 function Join(userID){
     const user = users.GetUser(userID)
-    Players.push({Name: user.Name, Score: 0, isDealer: false})
+    Players.push({Name: user.Name, Score: 0, isDealer: false, userID})
     
     const myCards = captionsDeck.list.slice(iCurrentCaption, iCurrentCaption + DEAL_AMOUNT);
     iCurrentCaption += DEAL_AMOUNT; //move current caption ahead
@@ -42,8 +42,12 @@ function Join(userID){
     return { playerID: Players.length-1, myCards};
 }
 
+function GetPlayerID(userID){
+    return Players.findIndex(x=> x.userID == userID);
+}
+
 module.exports = {
     Players, PictureDeck, CurrentPicture, 
     CardsInPlay: CardsInPlay,
-    Join, SubmitCaption, FlipPicture
+    Join, SubmitCaption, FlipPicture, GetPlayerID
 }

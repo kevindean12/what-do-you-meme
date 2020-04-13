@@ -7,6 +7,15 @@ const game = require('../models/Game');
 //acts as a local controller
 const router = express.Router();
 
+//translate userID to playerID
+router.use(function(req, res, next) {
+    if(req.userID != null ){
+        req.playerID = game.GetPlayerID(req.userID)
+    }
+    console.log({ userID: req.userID, playerID: req.playerID })
+    next();
+});
+
 router
     .get('/', (req, res) => res.send({
         Players: game.Players,
@@ -22,8 +31,7 @@ router
         res.send(quoteCards.list[quoteCards.list.length - 1]);
     })
     .post('/cardsInPlay', (req, res) => {
-        const playerID = req.body.playerID;
-        game.SubmitCaption(req.body.caption, playerID);
+        game.SubmitCaption(req.body.caption, req.playerID);
         res.send({success: true})
     })
 

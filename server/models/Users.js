@@ -1,6 +1,7 @@
 const Users = [
     {Name: 'Kevin', Password: '2020', Email: 'kevin@notmail.com', userID: 0},
-    {Name: 'Person', Password: '2012', Email: 'person@gmail.com', userID: 1}
+    {Name: 'Person', Password: '2012', Email: 'person@gmail.com', userID: 1},
+    { Name: 'Bernie', Password: '2020', Email: 'bernie@gmail.com', userID: 2 }
 ];
 
 module.exports = {
