@@ -1,13 +1,10 @@
-import myFetch, { User } from "./myFetch";
+import myFetch from "./myFetch";
 
-let ob = {
-    CurrentUser: null,
-    async Login(email, password){
-        const user = await myFetch('/users/login', { email, password });
-        
-        return this.CurrentUser = user;
-    }
+
+export let CurrentUser = null;
+
+export async function Login(email, password){
+    const user = await myFetch('/users/login', { email, password });
+    
+    return CurrentUser = user;
 }
-
-
-export default ob;

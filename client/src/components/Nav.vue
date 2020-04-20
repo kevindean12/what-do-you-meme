@@ -44,15 +44,15 @@
 
             <div class="navbar-end">
             <div class="navbar-item">
-                <Login :CurrentUser="Users.CurrentUser"></Login>
-                <!-- <div class="buttons">
+                <!-- <Login :CurrentUser="CurrentUser"></Login> -->
+                <div class="buttons">
                 <a class="button is-primary">
                     <strong>Sign up</strong>
                 </a>
                 <a class="button is-light" href="/login">
                     Log in
                 </a>
-                </div> -->
+                </div>
             </div>
             </div>
         </div>
@@ -60,17 +60,11 @@
 </template>
 
 <script>
-import Login from "./LoginComponent";
-import Users from "../models/Users";
 export default {
     data: () => ({ //tells JS that it's a one-line arrow function, which returns results of that one line
         isOpen: false,
-        Users: Users
     }),
     //alternate: data(){return{objectKey:objectValue}}
-    components: {
-        Login
-    }
 }
 </script>
 

@@ -26,12 +26,16 @@
 import * as Game from "../models/Game"; //import all the named exports, creates an object that holds them all as props
 export default { //inside this object are available to our component
   name: 'Home',
+  created(){
+    Game.Init();
+    Game.Start();
+  },
+  destroyed(){
+    Game.Pause();
+  },
   data: () => ({
     Game
   }),
-  created(){
-    Game.Init();
-  },
   components: {
     
   }

@@ -23,7 +23,7 @@ router
         CurrentPicture: game.CurrentPicture,
         CardsInPlay: game.CardsInPlay.map(x => ({...x, playerID: 'unknown'}) )
     }))
-    .post('/join', (req, res) => res.send(game.Join(req.body.userID)))
+    .post('/join', (req, res) => res.send(game.Join(req.userID)))
     .post('/flipPicture', (req, res) => res.send(game.FlipPicture()))
     .get('/quoteCards', (req, res) => res.send(quoteCards))
     .post('/quoteCards', (req, res) => {
