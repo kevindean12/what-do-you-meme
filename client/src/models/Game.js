@@ -1,20 +1,19 @@
 import {CurrentUser}from "./Users";
 import myFetch from "./myFetch";
 
-
-
-export let CurrentPicture = ""; //could use int index here
 let interval; //reference to timer that pings server to check for changes
-
-
 
 export default {
     State = {},
     MyCards = [],
     Init(){
+        if(this.MyCards.length){
+            //player has already joined but navigated away - don't restart them
+            return;
+        }
         myFetch('/game/join', {})
             .then(x=> { 
-                MyCards = x;
+                this.MyCards = x.myCards;
                 console.log(x);
             })
             .catch(err => console.warn(err));
@@ -22,14 +21,13 @@ export default {
     Run(){
         myFetch('/game')
             .then(x=> { 
-                State = x;
+                this.State = x;
                 console.log(x);
             });
     },
     Start(){
-        interval = setInterval(Run, 2000);
-        //aka:
-        //interval = setInterval(() => Run(), 2000);
+        interval = setInterval(this.Run, 2000);
+        //aka interval = setInterval(() => this.Run(), 2000);
     },
     Pause(){
         clearInterval(interval);
