@@ -23,7 +23,7 @@
 <script>
 // @ is an alias to /src
 //import {Players, PictureDeck, CurrentPicture, Init} from "../models/Game";
-import * as Game from "../models/Game"; //import all the named exports, creates an object that holds them all as props
+import Game from "../models/Game"; //import all the named exports, creates an object that holds them all as props
 export default { //inside this object are available to our component
   name: 'Home',
   created(){
