@@ -33,6 +33,10 @@ function SubmitCaption(caption, playerID) {
 }
 
 function Join(userID){
+    if(Players.some(x => x.userID == userID)){
+        //if the player has already joined the game eg in another browser
+        throw Error("You have already joined the game from another environment!");
+    }
     const user = users.GetUser(userID)
     Players.push({Name: user.Name, Score: 0, isDealer: false, userID})
     

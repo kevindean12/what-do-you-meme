@@ -16,7 +16,8 @@ export default {
             .then(x=> { 
                 MyCards = x;
                 console.log(x);
-            });
+            })
+            .catch(err => console.warn(err));
     },
     Run(){
         myFetch('/game')
