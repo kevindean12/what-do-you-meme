@@ -2,9 +2,7 @@ const users = require("./Users");
 const captionsDeck = require("./quoteCards");
 const DEAL_AMOUNT = 3;
 let iCurrentCaption = 0;
-const Players = [
-    { Name: 'Bernie', Score: 0, isDealer: true, userID: 2 }
-];
+const Players = [];
 
 const PictureDeck = [
     'https://www.telegraph.co.uk/content/dam/news/2016/04/05/ackbar_trans_NvBQzQNjv4BquzNJMpt-xp3nPuQhFJOjaI1_Bnx9uINdC_XC5LRmTXQ.jpg?imwidth=450',

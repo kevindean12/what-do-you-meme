@@ -17,12 +17,16 @@ router.use(function(req, res, next) {
 });
 
 router
-    .get('/', (req, res) => res.send({
-        Players: game.Players,
-        PictureDeck: game.PictureDeck,
-        CurrentPicture: game.CurrentPicture,
-        CardsInPlay: game.CardsInPlay.map(x => ({...x, playerID: 'unknown'}) )
-    }))
+    .get('/', (req, res) => {
+        console.log(req.userID);
+        res.send({
+            Players: game.Players,
+            PictureDeck: game.PictureDeck,
+            CurrentPicture: game.CurrentPicture,
+            CardsInPlay: game.CardsInPlay.map(x => ({...x, playerID: 'unknown'}) )
+        });
+
+    })
     .post('/join', (req, res) => res.send(game.Join(req.userID)))
     .post('/flipPicture', (req, res) => res.send(game.FlipPicture()))
     .get('/quoteCards', (req, res) => res.send(quoteCards))

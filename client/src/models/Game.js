@@ -4,8 +4,8 @@ import myFetch from "./myFetch";
 let interval; //reference to timer that pings server to check for changes
 
 export default {
-    State = {},
-    MyCards = [],
+    State: {},
+    MyCards: [],
     Init(){
         if(this.MyCards.length){
             //player has already joined but navigated away - don't restart them
@@ -26,8 +26,7 @@ export default {
             });
     },
     Start(){
-        interval = setInterval(this.Run, 2000);
-        //aka interval = setInterval(() => this.Run(), 2000);
+        interval = setInterval(() => this.Run(), 2000);
     },
     Pause(){
         clearInterval(interval);
