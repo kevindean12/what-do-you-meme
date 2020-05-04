@@ -29,6 +29,9 @@
             <button class="button is-primary" @click.prevent="google_login" >
                 Login with Google
             </button>
+            <button class="button is-primary" @click.prevent="facebook_login" >
+                Login with Facebook
+            </button>
         </div>
   </form>
 </template>
@@ -36,6 +39,7 @@
 <script>
 import {Login} from "../models/Users";
 const GOOGLE_CLIENT_ID = "493198841012-b7utvcvb5ohs2jh21td1djeb51lksm07.apps.googleusercontent.com";
+const FB_CLIENT_ID = "538529810199504";
 let auth2 = null;
 
 export default {
@@ -53,12 +57,34 @@ export default {
                 })
             })
         }
+
+        window.fbAsyncInit = function() {
+            FB.init({
+            appId      : FB_CLIENT_ID,
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v3.0'
+            });
+            
+            //FB.AppEvents.logPageView();   
+            
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
     },
     data(){
         return {
             email: '',
             password: '',
-            error: ''
+            error: '',
+            profile_picture: null
         }
     },
     methods: {
@@ -70,20 +96,40 @@ export default {
                 this.error = error;
             }
         },
-         google_login(){
-                auth2.signIn()
-                .then(googleUser =>{
-                    console.log(googleUser);
-                    
-                    const profile = googleUser.getBasicProfile();
-                    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-                    console.log('Full Name: ' + profile.getName());
-                    console.log('Given Name: ' + profile.getGivenName());
-                    console.log('Family Name: ' + profile.getFamilyName());
-                    console.log("Image URL: " + profile.getImageUrl());
-                    console.log("Email: " + profile.getEmail());
-                } )
-                .catch(error => this.error = error.error);
+        google_login(){
+            auth2.signIn()
+            .then(googleUser =>{
+                console.log(googleUser);
+                
+                const profile = googleUser.getBasicProfile();
+                console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                console.log('Full Name: ' + profile.getName());
+                console.log('Given Name: ' + profile.getGivenName());
+                console.log('Family Name: ' + profile.getFamilyName());
+                console.log("Image URL: " + profile.getImageUrl());
+                console.log("Email: " + profile.getEmail());
+
+                this.profile_picture = profile.getImageUrl();
+
+                return Login("google", googleUser.getAuthResponse().access_token)
+                    .then(x => this.$router.push('/game'))
+            } )
+            .catch(error => this.error = error.error);
+        },
+        facebook_login(){
+            FB.login(response => {
+                console.log(response);
+
+                FB.api('/me?fields=email,name,picture', response => {
+                    console.log(response);
+                    this.profile_picture = response.picture.data.url;
+                });
+                Login("facebook", response.authResponse.accessToken)
+                    .then(x=> this.$router.push('/game'))
+                    .catch(error => this.error = error)
+                }, 
+                {scope: 'email'}
+            );
         }
     }
 }
